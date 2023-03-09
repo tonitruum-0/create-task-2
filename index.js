@@ -8,6 +8,7 @@ let result;
 let arr = [];
 let fact;
 let i = 0;
+let usedArr = [];
 
 DOMSelectors.submitBtn.addEventListener("click", main);
 function main(e) {
@@ -55,22 +56,31 @@ async function numFact(num) {
   }
 }
 
+function createCards() {
+  arr.forEach((a) => {
+    if (!a.Created) {
+      a.Created = true;
+      for (let item of usedArr) {
+        if (item.Fact === a.Fact) {
+          numFact(a.Number).then((a.Fact = result.text));
+          console.log("x");
+          createCards();
+          return;
+        }
+      }
+      insertHTML(a.Number, a.EvenOrOdd, a.Fact);
+      usedArr.push(new array(a.Number, a.EvenOrOdd, a.Fact));
+    }
+  });
+}
+
 class array {
   constructor(num, evenOdd, fact) {
     this.Number = num;
     this.EvenOrOdd = evenOdd;
     this.Fact = fact;
-    this.Created = "false";
+    this.Created = false;
   }
-}
-
-function createCards() {
-  arr.forEach((a) => {
-    if (a.Created === "false") {
-      a.Created = "true";
-      document.getElementById("container").insertAdjacentHTML("afterbegin", `<div class=card><p class="num text">${a.Number} - ${a.EvenOrOdd}</p><p class="fact text">${a.Fact}</p></div>`);
-    }
-  });
 }
 
 function add() {
@@ -83,4 +93,8 @@ function add() {
 function remove() {
   DOMSelectors.err.style.opacity = "0";
   DOMSelectors.err.style.transition = "1s ease";
+}
+
+function insertHTML(num, eoo, fact) {
+  document.getElementById("container").insertAdjacentHTML("afterbegin", `<div class=card><p class="num text">${num} - ${eoo}</p><p class="fact text">${fact}</p></div>`);
 }
