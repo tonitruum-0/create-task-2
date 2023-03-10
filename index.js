@@ -58,7 +58,6 @@ async function numFact(num) {
 }
 
 function createCards() {
-  console.log("run");
   arr.forEach((a) => {
     if (!a.Created) {
       a.Created = true;
