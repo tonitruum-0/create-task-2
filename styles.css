@@ -44,13 +44,22 @@ html {
   color: #00acb5;
 }
 
-#err {
+#err,
+#dup {
   position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
   font-size: 5vw;
   color: red;
   opacity: 0;
+  z-index: 2;
+}
+
+#dup {
+  left: 10%;
+}
+
+#err {
+  transform: translateX(-50%);
+  left: 50%;
 }
 
 form,

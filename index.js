@@ -2,6 +2,7 @@ const DOMSelectors = {
   numField: document.getElementById("numberField"),
   submitBtn: document.getElementById("submit"),
   err: document.getElementById("err"),
+  dup: document.getElementById("dup"),
 };
 
 let result;
@@ -15,12 +16,12 @@ function main(e) {
   e.preventDefault();
   let num = DOMSelectors.numField.value;
   if (num === "" || num < 1) {
-    add();
+    add(DOMSelectors.err);
     return;
   } else {
-    remove();
+    //remove(DOMSelectors.err);
     if (isNaN(DOMSelectors.numField.value)) {
-      add();
+      add(DOMSelectors.err);
     } else {
       let evenOdd = isEven(num);
       numFact(num)
@@ -57,13 +58,14 @@ async function numFact(num) {
 }
 
 function createCards() {
+  console.log("run");
   arr.forEach((a) => {
     if (!a.Created) {
       a.Created = true;
       for (let item of usedArr) {
         if (item.Fact === a.Fact) {
           numFact(a.Number).then((a.Fact = result.text));
-          console.log("x");
+          add(DOMSelectors.dup);
           createCards();
           return;
         }
@@ -83,16 +85,16 @@ class array {
   }
 }
 
-function add() {
-  DOMSelectors.err.style.opacity = "1";
-  DOMSelectors.err.style.transition = "1s ease";
-  DOMSelectors.err.addEventListener("transitionend", remove);
+function add(specifier) {
+  specifier.style.opacity = "1";
+  specifier.style.transition = "1s ease";
+  specifier.addEventListener("transitionend", remove);
   DOMSelectors.numField.value = "";
 }
 
-function remove() {
-  DOMSelectors.err.style.opacity = "0";
-  DOMSelectors.err.style.transition = "1s ease";
+function remove(e) {
+  e.target.style.opacity = "0";
+  e.target.style.transition = "1s ease";
 }
 
 function insertHTML(num, eoo, fact) {
