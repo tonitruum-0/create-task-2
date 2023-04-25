@@ -1,8 +1,10 @@
 const DOMSelectors = {
-  numField: document.getElementById("numberField"),
-  submitBtn: document.getElementById("submit"),
-  err: document.getElementById("err"),
-  dup: document.getElementById("dup"),
+  numField: document.getElementById(
+    'numberField'
+  ),
+  submitBtn: document.getElementById('submit'),
+  err: document.getElementById('err'),
+  dup: document.getElementById('dup'),
 };
 
 let result;
@@ -11,37 +13,41 @@ let fact;
 let i = 0;
 let usedArr = [];
 
-DOMSelectors.submitBtn.addEventListener("click", main);
+DOMSelectors.submitBtn.addEventListener(
+  'click',
+  main
+);
 function main(e) {
   e.preventDefault();
   let num = DOMSelectors.numField.value;
-  if (num === "" || num < 1) {
+  if (num === '' || num < 1) {
     add(DOMSelectors.err);
     return;
   } else {
-    //remove(DOMSelectors.err);
     if (isNaN(DOMSelectors.numField.value)) {
       add(DOMSelectors.err);
     } else {
       let evenOdd = isEven(num);
       numFact(num)
         .then(function (response) {
-          arr.push(new array(num, evenOdd, response));
+          arr.push(
+            new array(num, evenOdd, response)
+          );
           createCards();
         })
         .catch(function (error) {
           console.error(error);
         });
-      DOMSelectors.numField.value = "";
+      DOMSelectors.numField.value = '';
     }
   }
 }
 
 function isEven(num) {
   if (num % 2 === 0) {
-    return "even";
+    return 'even';
   } else {
-    return "odd";
+    return 'odd';
   }
 }
 
@@ -52,7 +58,7 @@ async function numFact(num) {
     result = await response.json();
     return result.text;
   } catch (error) {
-    alert("Error caught: check console");
+    alert('Error caught: check console');
     console.error(error);
   }
 }
@@ -63,14 +69,18 @@ function createCards() {
       a.Created = true;
       for (let item of usedArr) {
         if (item.Fact === a.Fact) {
-          numFact(a.Number).then((a.Fact = result.text));
+          numFact(a.Number).then(
+            (a.Fact = result.text)
+          );
           add(DOMSelectors.dup);
           createCards();
           return;
         }
       }
       insertHTML(a.Number, a.EvenOrOdd, a.Fact);
-      usedArr.push(new array(a.Number, a.EvenOrOdd, a.Fact));
+      usedArr.push(
+        new array(a.Number, a.EvenOrOdd, a.Fact)
+      );
     }
   });
 }
@@ -85,17 +95,25 @@ class array {
 }
 
 function add(specifier) {
-  specifier.style.opacity = "1";
-  specifier.style.transition = "1s ease";
-  specifier.addEventListener("transitionend", remove);
-  DOMSelectors.numField.value = "";
+  specifier.style.opacity = '1';
+  specifier.style.transition = '1s ease';
+  specifier.addEventListener(
+    'transitionend',
+    remove
+  );
+  DOMSelectors.numField.value = '';
 }
 
 function remove(e) {
-  e.target.style.opacity = "0";
-  e.target.style.transition = "1s ease";
+  e.target.style.opacity = '0';
+  e.target.style.transition = '1s ease';
 }
 
 function insertHTML(num, eoo, fact) {
-  document.getElementById("container").insertAdjacentHTML("afterbegin", `<div class=card><p class="num text">${num} - ${eoo}</p><p class="fact text">${fact}</p></div>`);
+  document
+    .getElementById('container')
+    .insertAdjacentHTML(
+      'afterbegin',
+      `<div class=card><p class="num text">${num} - ${eoo}</p><p class="fact text">${fact}</p></div>`
+    );
 }
