@@ -9,8 +9,6 @@ const DOMSelectors = {
 
 let result;
 let arr = [];
-let fact;
-let i = 0;
 let usedArr = [];
 
 DOMSelectors.submitBtn.addEventListener('click', main);
