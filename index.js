@@ -13,10 +13,7 @@ let fact;
 let i = 0;
 let usedArr = [];
 
-DOMSelectors.submitBtn.addEventListener(
-  'click',
-  main
-);
+DOMSelectors.submitBtn.addEventListener('click', main);
 function main(e) {
   e.preventDefault();
   let num = DOMSelectors.numField.value;
@@ -69,18 +66,14 @@ function createCards() {
       a.Created = true;
       for (let item of usedArr) {
         if (item.Fact === a.Fact) {
-          numFact(a.Number).then(
-            (a.Fact = result.text)
-          );
+          numFact(a.Number).then((a.Fact = result.text));
           add(DOMSelectors.dup);
           createCards();
           return;
         }
       }
       insertHTML(a.Number, a.EvenOrOdd, a.Fact);
-      usedArr.push(
-        new array(a.Number, a.EvenOrOdd, a.Fact)
-      );
+      usedArr.push(new array(a.Number, a.EvenOrOdd, a.Fact));
     }
   });
 }
