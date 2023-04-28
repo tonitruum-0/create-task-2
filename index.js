@@ -7,8 +7,10 @@ const DOMSelectors = {
   dup: document.getElementById('dup'),
 };
 
-let result;
-let usedArr = [];
+let ran = false;
+
+
+let usedarr = [];
 
 DOMSelectors.submitBtn.addEventListener('click', main);
 function main(e) {
@@ -24,11 +26,8 @@ function main(e) {
       let evenOdd = isEven(num);
       numFact(num)
         .then(function (response) {
-          let arr = [];
-          arr.push(
-            new array(num, evenOdd, response)
-          );
-          createCards(arr);
+          
+          console.log((new array(num, evenOdd, response)));
         })
         
       DOMSelectors.numField.value = '';
@@ -48,7 +47,7 @@ async function numFact(num) {
   try {
     let api_url = `http://numbersapi.com/${num}?json`;
     let response = await fetch(api_url);
-    result = await response.json();
+    let result = await response.json();
     return result.text;
   } catch (error) {
     alert('Error caught: check console');
@@ -56,7 +55,7 @@ async function numFact(num) {
   }
 }
 
-function createCards(arr) {
+function createCards(arr, usedArr) {
   arr.forEach((a) => {
     if (!a.Created) {
       a.Created = true;
