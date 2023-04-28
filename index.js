@@ -8,7 +8,6 @@ const DOMSelectors = {
 };
 
 let result;
-let arr = [];
 let usedArr = [];
 
 DOMSelectors.submitBtn.addEventListener('click', main);
@@ -25,14 +24,13 @@ function main(e) {
       let evenOdd = isEven(num);
       numFact(num)
         .then(function (response) {
+          let arr = [];
           arr.push(
             new array(num, evenOdd, response)
           );
-          createCards();
+          createCards(arr);
         })
-        .catch(function (error) {
-          console.error(error);
-        });
+        
       DOMSelectors.numField.value = '';
     }
   }
@@ -58,15 +56,13 @@ async function numFact(num) {
   }
 }
 
-function createCards() {
+function createCards(arr) {
   arr.forEach((a) => {
     if (!a.Created) {
       a.Created = true;
       for (let item of usedArr) {
         if (item.Fact === a.Fact) {
-          numFact(a.Number).then((a.Fact = result.text));
           add(DOMSelectors.dup);
-          createCards();
           return;
         }
       }
