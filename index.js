@@ -78,7 +78,6 @@ function add(specifier) {
   specifier.addEventListener('transitionend', remove);
   DOMSelectors.numField.value = '';
 }
-
 function remove(e) {
   e.target.style.opacity = '0';
   e.target.style.transition = '1s ease';
