@@ -1,19 +1,13 @@
 const DOMSelectors = {
-  numField: document.getElementById(
-    'numberField'
-  ),
-  submitBtn:
-    document.getElementById('submit'),
+  numField: document.getElementById('numberField'),
+  submitBtn: document.getElementById('submit'),
   err: document.getElementById('err'),
   dup: document.getElementById('dup'),
 };
 
 let usedArr = [];
 
-DOMSelectors.submitBtn.addEventListener(
-  'click',
-  main
-);
+DOMSelectors.submitBtn.addEventListener('click', main);
 function main(e) {
   e.preventDefault();
   let num = DOMSelectors.numField.value;
@@ -21,20 +15,12 @@ function main(e) {
     add(DOMSelectors.err);
     return;
   } else {
-    if (
-      isNaN(DOMSelectors.numField.value)
-    ) {
+    if (isNaN(DOMSelectors.numField.value)) {
       add(DOMSelectors.err);
     } else {
       let evenOdd = isEven(num);
-      numFact(num).then(function (
-        response
-      ) {
-        let tempArr = new array(
-          num,
-          evenOdd,
-          response
-        );
+      numFact(num).then(function (response) {
+        let tempArr = new array(num, evenOdd, response);
         createCards(tempArr);
       });
 
@@ -58,9 +44,7 @@ async function numFact(num) {
     let result = await response.json();
     return result.text;
   } catch (error) {
-    alert(
-      'Error caught: check console'
-    );
+    alert('Error caught: check console');
     console.error(error);
   }
 }
@@ -74,18 +58,8 @@ function createCards(arr) {
         return;
       }
     }
-    insertHTML(
-      arr.Number,
-      arr.EvenOrOdd,
-      arr.Fact
-    );
-    usedArr.push(
-      new array(
-        arr.Number,
-        arr.EvenOrOdd,
-        arr.Fact
-      )
-    );
+    insertHTML(arr.Number, arr.EvenOrOdd, arr.Fact);
+    usedArr.push(new array(arr.Number, arr.EvenOrOdd, arr.Fact));
   }
 }
 
@@ -100,12 +74,8 @@ class array {
 
 function add(specifier) {
   specifier.style.opacity = '1';
-  specifier.style.transition =
-    '1s ease';
-  specifier.addEventListener(
-    'transitionend',
-    remove
-  );
+  specifier.style.transition = '1s ease';
+  specifier.addEventListener('transitionend', remove);
   DOMSelectors.numField.value = '';
 }
 function remove(e) {
@@ -114,10 +84,16 @@ function remove(e) {
 }
 
 function insertHTML(num, eoo, fact) {
-  document
-    .getElementById('container')
-    .insertAdjacentHTML(
-      'afterbegin',
-      `<div class=card><p class="num text">${num} - ${eoo}</p><p class="fact text">${fact}</p></div>`
-    );
+  document.getElementById('container').insertAdjacentHTML('afterbegin', `<div class=card><p class="num text">${num} - ${eoo}</p><p class="fact text">${fact}</p></div>`);
 }
+
+a;
+
+awaita;
+
+a;
+aa;
+
+aa;
+
+aaa;
