@@ -28,7 +28,6 @@ function main(e) {
     }
   }
 }
-
 function isEven(num) {
   if (num % 2 === 0) {
     return 'even';
@@ -86,14 +85,3 @@ function remove(e) {
 function insertHTML(num, eoo, fact) {
   document.getElementById('container').insertAdjacentHTML('afterbegin', `<div class=card><p class="num text">${num} - ${eoo}</p><p class="fact text">${fact}</p></div>`);
 }
-
-a;
-
-awaita;
-
-a;
-aa;
-
-aa;
-
-aaa;
