@@ -5,8 +5,6 @@ const DOMSelectors = {
   dup: document.getElementById('dup'),
 };
 
-let ran = false;
-
 let usedArr = [];
 
 DOMSelectors.submitBtn.addEventListener('click', main);
@@ -22,7 +20,8 @@ function main(e) {
     } else {
       let evenOdd = isEven(num);
       numFact(num).then(function (response) {
-        createCards(new array(num, evenOdd, response));
+        let tempArr = new array(num, evenOdd, response);
+        createCards(tempArr);
       });
 
       DOMSelectors.numField.value = '';
