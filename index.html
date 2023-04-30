@@ -9,10 +9,20 @@
     <title>ap app</title>
   </head>
   <body>
-    <form id="form">
-      <input id="numberField" type="text" placeholder="number" autocomplete="off" required />
-      <button id="submit" type="submit">Submit</button>
-    </form>
+    <div id="form-container">
+      <form id="form">
+        <input
+          id="numberField"
+          type="text"
+          placeholder="number"
+          autocomplete="off"
+          required
+        />
+        <button id="submit" type="submit">Submit</button>
+      </form>
+      <button id="random">Random Number</button>
+    </div>
+
     <div id="err">Enter an Integer</div>
     <div id="dup">Duplicate Fact Generated - Card Deleted</div>
     <div id="container"></div>

@@ -3,11 +3,14 @@ const DOMSelectors = {
   submitBtn: document.getElementById('submit'),
   err: document.getElementById('err'),
   dup: document.getElementById('dup'),
+  random: document.getElementById('random'),
 };
 
 let usedArr = [];
 
+DOMSelectors.random.addEventListener('click', random);
 DOMSelectors.submitBtn.addEventListener('click', main);
+
 function main(e) {
   e.preventDefault();
   let num = DOMSelectors.numField.value;
@@ -21,7 +24,8 @@ function main(e) {
       let evenOdd = isEven(num);
       numFact(num).then(function (response) {
         let tempArr = new array(num, evenOdd, response);
-        createCards(tempArr);
+
+        createCards(tempArr, false, undefined);
       });
 
       DOMSelectors.numField.value = '';
@@ -48,15 +52,36 @@ async function numFact(num) {
   }
 }
 
-function createCards(arr) {
-  for (let item of usedArr) {
-    if (item.Fact === arr.Fact) {
-      add(DOMSelectors.dup);
-      return;
+function random(e) {
+  e.preventDefault();
+  let num = Math.floor(Math.random() * 100) * Math.floor(Math.random() * 100);
+  createCards(undefined, true, num);
+}
+
+function createCards(arr, random, num) {
+  if (random) {
+    numFact(num).then(function (response) {
+      let evenOdd = isEven(num);
+      for (let item of usedArr) {
+        if (item.Fact === response) {
+          add(DOMSelectors.dup);
+          return;
+        }
+      }
+      arr = new array(num, evenOdd, response);
+      insertHTML(arr.Number, arr.EvenOrOdd, arr.Fact);
+      usedArr.push(new array(arr.Number, arr.EvenOrOdd, arr.Fact));
+    });
+  } else {
+    for (let item of usedArr) {
+      if (item.Fact === arr.Fact) {
+        add(DOMSelectors.dup);
+        return;
+      }
     }
+    insertHTML(arr.Number, arr.EvenOrOdd, arr.Fact);
+    usedArr.push(new array(arr.Number, arr.EvenOrOdd, arr.Fact));
   }
-  insertHTML(arr.Number, arr.EvenOrOdd, arr.Fact);
-  usedArr.push(new array(arr.Number, arr.EvenOrOdd, arr.Fact));
 }
 
 class array {

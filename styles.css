@@ -62,11 +62,27 @@ html {
   left: 50%;
 }
 
+#form {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
 form,
 input,
 button {
   margin: auto;
-  width: 50%;
+  width: 14rem;
   padding: 10px;
   text-align: center;
+}
+
+#form-container {
+  margin: 0px 26rem;
+
+  display: flex;
+}
+
+#random {
+  width: 5rem;
 }
