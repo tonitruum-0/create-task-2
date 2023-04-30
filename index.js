@@ -1,7 +1,5 @@
 const DOMSelectors = {
-  numField: document.getElementById(
-    'numberField'
-  ),
+  numField: document.getElementById('numberField'),
   submitBtn: document.getElementById('submit'),
   err: document.getElementById('err'),
   dup: document.getElementById('dup'),
@@ -9,8 +7,7 @@ const DOMSelectors = {
 
 let ran = false;
 
-
-let usedarr = [];
+let usedArr = [];
 
 DOMSelectors.submitBtn.addEventListener('click', main);
 function main(e) {
@@ -24,12 +21,10 @@ function main(e) {
       add(DOMSelectors.err);
     } else {
       let evenOdd = isEven(num);
-      numFact(num)
-        .then(function (response) {
-          
-          console.log((new array(num, evenOdd, response)));
-        })
-        
+      numFact(num).then(function (response) {
+        createCards(new array(num, evenOdd, response));
+      });
+
       DOMSelectors.numField.value = '';
     }
   }
@@ -55,20 +50,18 @@ async function numFact(num) {
   }
 }
 
-function createCards(arr, usedArr) {
-  arr.forEach((a) => {
-    if (!a.Created) {
-      a.Created = true;
-      for (let item of usedArr) {
-        if (item.Fact === a.Fact) {
-          add(DOMSelectors.dup);
-          return;
-        }
+function createCards(arr) {
+  if (!arr.Created) {
+    arr.Created = true;
+    for (let item of usedArr) {
+      if (item.Fact === arr.Fact) {
+        add(DOMSelectors.dup);
+        return;
       }
-      insertHTML(a.Number, a.EvenOrOdd, a.Fact);
-      usedArr.push(new array(a.Number, a.EvenOrOdd, a.Fact));
     }
-  });
+    insertHTML(arr.Number, arr.EvenOrOdd, arr.Fact);
+    usedArr.push(new array(arr.Number, arr.EvenOrOdd, arr.Fact));
+  }
 }
 
 class array {
@@ -83,10 +76,7 @@ class array {
 function add(specifier) {
   specifier.style.opacity = '1';
   specifier.style.transition = '1s ease';
-  specifier.addEventListener(
-    'transitionend',
-    remove
-  );
+  specifier.addEventListener('transitionend', remove);
   DOMSelectors.numField.value = '';
 }
 
@@ -96,10 +86,5 @@ function remove(e) {
 }
 
 function insertHTML(num, eoo, fact) {
-  document
-    .getElementById('container')
-    .insertAdjacentHTML(
-      'afterbegin',
-      `<div class=card><p class="num text">${num} - ${eoo}</p><p class="fact text">${fact}</p></div>`
-    );
+  document.getElementById('container').insertAdjacentHTML('afterbegin', `<div class=card><p class="num text">${num} - ${eoo}</p><p class="fact text">${fact}</p></div>`);
 }
