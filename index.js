@@ -49,17 +49,14 @@ async function numFact(num) {
 }
 
 function createCards(arr) {
-  if (!arr.Created) {
-    arr.Created = true;
-    for (let item of usedArr) {
-      if (item.Fact === arr.Fact) {
-        add(DOMSelectors.dup);
-        return;
-      }
+  for (let item of usedArr) {
+    if (item.Fact === arr.Fact) {
+      add(DOMSelectors.dup);
+      return;
     }
-    insertHTML(arr.Number, arr.EvenOrOdd, arr.Fact);
-    usedArr.push(new array(arr.Number, arr.EvenOrOdd, arr.Fact));
   }
+  insertHTML(arr.Number, arr.EvenOrOdd, arr.Fact);
+  usedArr.push(new array(arr.Number, arr.EvenOrOdd, arr.Fact));
 }
 
 class array {
@@ -67,7 +64,6 @@ class array {
     this.Number = num;
     this.EvenOrOdd = evenOdd;
     this.Fact = fact;
-    this.Created = false;
   }
 }
 
@@ -83,5 +79,10 @@ function remove(e) {
 }
 
 function insertHTML(num, eoo, fact) {
-  document.getElementById('container').insertAdjacentHTML('afterbegin', `<div class=card><p class="num text">${num} - ${eoo}</p><p class="fact text">${fact}</p></div>`);
+  document
+    .getElementById('container')
+    .insertAdjacentHTML(
+      'afterbegin',
+      `<div class=card><p class="num text">${num} - ${eoo}</p><p class="fact text">${fact}</p></div>`
+    );
 }
